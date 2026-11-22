@@ -8,6 +8,7 @@
 <meta name="claude:viewport-fit-sides" content="cover">
 <style>
 /* 网页版式：左边目录跟着走，右边正文；图都和正文同一条左边线，点图放大；八问和例子做成一次看一个的切换
+   不画框：要点、图、切换页、表格都不加边框，只靠留白、字号和少量细横线分层
    颜色只有黑、灰和一点波哥图上的紫；大字是核心，灰色小字是补充 */
 :root{--bg:#ffffff;--ink:#1b1b1f;--muted:#6c6c75;--rule:#e2e2e8;--soft:#f5f5f8;--accent:#6a4bc4;
   --sans:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans CJK SC",sans-serif}
@@ -42,20 +43,21 @@ ul.sb li{margin:3px 0}
 .n{display:inline-block;width:20px;height:20px;border-radius:50%;background:var(--accent);color:#fff;font-size:12px;font-weight:700;
   line-height:20px;text-align:center;margin-right:6px;vertical-align:1px}
 
-/* 卡片：细线框，不上色 */
-.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin:14px 0}
+/* 并排的要点：不画框，靠留白分开 */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px 36px;margin:16px 0}
 .cards.c2{grid-template-columns:repeat(auto-fit,minmax(340px,1fr))}
-.cards.c1{grid-template-columns:1fr;margin:0}
-.card{border:1px solid var(--rule);padding:12px 14px;min-width:0}
+.cards.c1{grid-template-columns:1fr;margin:0;gap:16px}
+.card{min-width:0}
 .card .main{font-weight:600;line-height:1.6}
 .card .s{margin-top:4px}
-.lead{margin:0 0 6px}
-.lead .card .k{color:var(--muted);font-size:12.5px;font-weight:600;letter-spacing:.04em;display:block;margin-bottom:2px}
+dl.lead{display:grid;grid-template-columns:5.5em minmax(0,1fr);gap:6px 12px;margin:0 0 14px;max-width:720px}
+dl.lead dt{color:var(--muted)}
+dl.lead dd{margin:0;font-weight:600}
 
 /* 图：和正文同一条左边线；不放大到超过原图；点一下看大图 */
 figure{margin:14px 0}
 .imgw{position:relative;cursor:zoom-in;max-width:100%}
-.imgw img{display:block;width:100%;height:auto;border:1px solid var(--rule)}
+.imgw img{display:block;width:100%;height:auto}
 figcaption{color:var(--muted);font-size:13px;line-height:1.6;margin-top:6px;max-width:720px}
 .pin{position:absolute;transform:translate(-50%,-50%);width:22px;height:22px;border-radius:50%;background:var(--accent);color:#fff;
   font-size:13px;font-weight:700;line-height:22px;text-align:center;pointer-events:none}
@@ -64,36 +66,36 @@ figcaption{color:var(--muted);font-size:13px;line-height:1.6;margin-top:6px;max-
 .two.narrowimg{grid-template-columns:minmax(0,440px) minmax(0,1fr)}
 .lb{position:fixed;inset:0;z-index:100;background:rgba(10,10,14,.88);overflow:auto;padding:36px 20px 20px;cursor:zoom-out}
 .lb .imgw{cursor:zoom-out;background:#fff;margin:0 auto;max-width:none}
-.lb .imgw img{border:0}
 .lb .hint{position:fixed;top:8px;right:16px;color:#fff;font-size:13px}
 
 /* 步骤块 */
-.stepb{margin-top:30px;padding-top:20px;border-top:1px solid var(--rule)}
+.stepb{margin-top:44px}
 .stepb>h3 .k{color:var(--accent);margin-right:10px}
 
-/* 切换：一次看一个 */
+/* 切换：一次看一个。文字加一条下划线，不画框 */
 .tabs{margin:16px 0}
-.tablist{display:flex;flex-wrap:wrap;gap:6px}
-.tablist button{font:inherit;font-size:14px;line-height:1.4;padding:6px 13px;border:1px solid var(--rule);border-radius:999px;
-  background:var(--bg);color:var(--ink);cursor:pointer}
-.tablist button:hover{border-color:var(--muted)}
-.tablist button[aria-selected="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
-.tablist button b{font-weight:700;margin-right:5px}
-.panel{border:1px solid var(--rule);padding:18px 20px;margin-top:10px}
-.tabnav{display:flex;align-items:center;gap:10px;margin-top:10px;font-size:13.5px;color:var(--muted)}
-.tabnav button{font:inherit;font-size:13.5px;padding:5px 12px;border:1px solid var(--rule);background:var(--bg);color:var(--ink);cursor:pointer}
-.tabnav button:hover{border-color:var(--muted)}
-.tabnav [data-all]{margin-left:auto;border:0;color:var(--accent);padding:5px 0}
+.tablist{display:flex;flex-wrap:wrap;gap:0 2px;border-bottom:1px solid var(--rule)}
+.tablist button{font:inherit;font-size:14.5px;line-height:1.4;padding:8px 12px;border:0;border-bottom:2px solid transparent;margin-bottom:-1px;
+  background:none;color:var(--muted);cursor:pointer;border-radius:0}
+.tablist button:hover{color:var(--ink)}
+.tablist button[aria-selected="true"]{color:var(--ink);font-weight:600;border-bottom-color:var(--accent)}
+.tablist button b{font-weight:inherit;margin-right:5px}
+.panel{margin-top:18px}
+.tabnav{display:flex;align-items:center;gap:14px;margin-top:14px;font-size:13.5px;color:var(--muted)}
+.tabnav button{font:inherit;font-size:13.5px;padding:4px 0;border:0;background:none;color:var(--accent);cursor:pointer}
+.tabnav button:hover{text-decoration:underline}
+.tabnav [data-all]{margin-left:auto}
 .tabs.all>.tabnav [data-prev],.tabs.all>.tabnav [data-next],.tabs.all>.tabnav .pos{display:none}
+.tabs.all>.panel+.panel{margin-top:36px}
 html:not(.js) .tablist,html:not(.js) .tabnav{display:none}
-.tabs.cardtabs>.tablist{display:grid;grid-template-columns:repeat(auto-fit,minmax(122px,1fr))}
-.tabs.cardtabs>.tablist button{border-radius:0;text-align:left;padding:8px 10px}
-.tabs.cardtabs>.tablist button b{display:block;margin:0}
-.tabs.cardtabs>.tablist button small{display:block;color:var(--muted);font-size:12px;line-height:1.45;margin-top:2px}
-.tabs.cardtabs>.tablist button[aria-selected="true"] small{color:inherit;opacity:.75}
+.tabs.cardtabs>.tablist{display:grid;grid-template-columns:repeat(auto-fit,minmax(118px,1fr));gap:0 8px}
+.tabs.cardtabs>.tablist button{text-align:left;padding:8px 2px;display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-start}
+.tabs.cardtabs>.tablist button b{display:block;margin:0;font-weight:600;color:var(--ink)}
+.tabs.cardtabs>.tablist button small{display:block;color:var(--muted);font-size:12px;line-height:1.45;margin-top:2px;font-weight:400}
 .tabs.seg{margin:0 0 14px}
-.tabs.seg>.tablist button{font-size:13px;padding:3px 13px}
-.tabs.seg>.panel{border:0;padding:0;margin-top:8px}
+.tabs.seg>.tablist{border-bottom:0;gap:0 14px}
+.tabs.seg>.tablist button{font-size:13.5px;padding:2px 0;margin:0}
+.tabs.seg>.panel{margin-top:8px}
 .tabs.seg>.panel figure{margin:0}
 
 /* 八问的一页：上面是「看哪里」的截图，下面三栏 */
@@ -106,24 +108,24 @@ html:not(.js) .tablist,html:not(.js) .tabnav{display:none}
 .kv3 .tjx{border-left:2px solid var(--accent);padding-left:12px}
 .v{font-weight:600;white-space:nowrap}
 .v.no{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:3px}
-ol.sum{list-style:none;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:6px;margin:12px 0;font-size:13.5px}
-ol.sum a{display:flex;justify-content:space-between;gap:8px;border:1px solid var(--rule);padding:6px 10px;text-decoration:none;color:var(--ink)}
-ol.sum a:hover{border-color:var(--muted)}
+ol.sum{list-style:none;padding:0;display:flex;flex-wrap:wrap;gap:4px 22px;margin:10px 0 14px;font-size:14px}
+ol.sum a{display:inline-flex;gap:8px;text-decoration:none;color:var(--ink)}
+ol.sum a span:first-child{color:var(--muted)}
+ol.sum a:hover span:first-child{color:var(--ink)}
 
 /* 例子的八问成绩单 */
-.score{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px;margin:14px 0}
-.sc{border:1px solid var(--rule);padding:8px 10px;font-size:13.5px;line-height:1.6;min-width:0}
-.sc .h{display:flex;justify-content:space-between;gap:8px;font-weight:600}
+.score{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px 32px;margin:18px 0}
+.sc{font-size:13.5px;line-height:1.6;min-width:0}
+.sc .h{display:flex;gap:10px;font-weight:600}
 .sc .f{color:var(--muted)}
-.sc.no{border-color:var(--ink)}
 .no-tag{color:var(--accent);margin-right:10px;font-variant-numeric:tabular-nums}
 .take{margin:10px 0 0}
 .take b{font-weight:600}
 
 .scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;max-width:760px}
 table{border-collapse:collapse;width:100%;font-size:14px;line-height:1.6;margin:10px 0}
-th,td{border:1px solid var(--rule);padding:7px 10px;text-align:left;vertical-align:top}
-th{background:var(--soft);font-weight:600;white-space:nowrap}
+th,td{border:0;border-bottom:1px solid var(--rule);padding:8px 16px 8px 0;text-align:left;vertical-align:top}
+th{font-weight:600;white-space:nowrap;color:var(--muted);font-size:13px}
 table.small{font-size:13.5px;color:var(--muted)}
 table.small th{color:var(--ink)}
 td:first-child,th:first-child{white-space:nowrap}
@@ -156,9 +158,8 @@ dl.gl dd{margin:0;color:var(--muted)}
   .kv3{grid-template-columns:1fr;gap:12px}
   .tablist{flex-wrap:nowrap;overflow-x:auto;padding-bottom:4px}
   .tablist button{white-space:nowrap;flex:none}
-  .tabs.cardtabs>.tablist{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:132px;overflow-x:auto}
+  .tabs.cardtabs>.tablist{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:132px;overflow-x:auto;gap:0 14px}
   .tabs.cardtabs>.tablist button{white-space:normal}
-  .panel{padding:14px 14px}
 }
 @media (max-width:520px){body{font-size:15.5px}h1{font-size:24px}h2{font-size:20px;margin-top:48px}.core{font-size:17px}}
 @media print{.side,.tablist,.tabnav{display:none}.panel[hidden]{display:block!important}.page{display:block}}
@@ -174,11 +175,11 @@ dl.gl dd{margin:0;color:var(--muted)}
 <section id="top">
 <h1>波哥信号入门指南</h1>
 <p class="sub">给第一次接触这套系统的人 · v2 · 2026-11-22</p>
-<div class="cards lead">
-<div class="card"><span class="k">它是什么</span><div class="main">波哥每天发来的图。每只票一页，标着现在偏多还是偏空。</div></div>
-<div class="card"><span class="k">怎么读</span><div class="main">一张图只看三样：标记、是不是刚出的、回测框。</div></div>
-<div class="card"><span class="k">怎么用</span><div class="main">不照着买卖。自己先选好票，看到信号按八个问题过一遍，再决定动不动。</div></div>
-</div>
+<dl class="lead">
+<dt>它是什么</dt><dd>波哥每天发来的图。每只票一页，标着现在偏多还是偏空。</dd>
+<dt>怎么读</dt><dd>一张图只看三样：标记、是不是刚出的、回测框。</dd>
+<dt>怎么用</dt><dd>不照着买卖。自己先选好票，看到信号按八个问题过一遍，再决定动不动。</dd>
+</dl>
 <p class="s">前三节是主体：先学看一张图，再学拿到册子怎么看，再看七个真实例子。后面几节是补充。大字是要记住的，灰色小字第一遍可以跳过。图都可以点开看大图。日期都是美股交易日，册子在北京时间第二天早上到。</p>
 </section>
 <section id="s1"><h2>一、看懂一张图</h2>
