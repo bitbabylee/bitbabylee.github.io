@@ -7,7 +7,7 @@
 <title>波哥信号入门指南</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <style>
-/* 版式：一栏正文，大字是核心、灰色小字是补充；只有黑、灰和一点波哥图上的紫 */
+/* 版式：正文和图都靠左对齐，正文窄一点好读，图可以比正文宽；大字是核心、灰色小字是补充；只有黑、灰和一点波哥图上的紫 */
 :root{--bg:#ffffff;--ink:#1b1b1f;--muted:#6c6c75;--rule:#e2e2e8;--soft:#f5f5f8;--accent:#6a4bc4;
   --sans:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans CJK SC",sans-serif;
   --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace}
@@ -16,7 +16,9 @@
 *{box-sizing:border-box}
 body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.75;margin:0;
   padding-block:36px 72px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
-.wrap{max-width:780px;margin:0 auto}
+.wrap{max-width:1000px;margin:0 auto}
+.wrap>*,.ex>*{max-width:760px}
+.wrap>figure,.ex>figure,.wrap>section.ex{max-width:none}
 h1{font-size:28px;line-height:1.3;margin:0 0 4px;text-wrap:balance}
 .sub{color:var(--muted);font-size:13.5px;margin:0 0 24px}
 h2{font-size:21px;line-height:1.4;margin:56px 0 10px;padding-top:18px;border-top:1px solid var(--rule);text-wrap:balance}
@@ -51,7 +53,6 @@ td:first-child,th:first-child{white-space:nowrap}
 table.flow td:nth-child(2){font-weight:600}
 td.num,th.num{font-variant-numeric:tabular-nums}
 figure{margin:14px 0}
-@media (min-width:1000px){figure{width:min(1080px,calc(100vw - 48px));margin-left:50%;transform:translateX(-50%)}}
 .imgw{position:relative;min-width:640px}
 .imgw img{display:block;width:100%;height:auto;border:1px solid var(--rule)}
 figcaption,.cap{color:var(--muted);font-size:13px;line-height:1.6;margin-top:6px}
@@ -87,7 +88,6 @@ ol.walk .q{font-size:17px;font-weight:600}
 td.v{white-space:nowrap}
 .then-now{display:grid;grid-template-columns:1fr;gap:6px}
 .imgw.zoom{min-width:0;max-width:850px}
-figure.narrow{width:auto;margin-left:0;transform:none}
 .imgw.wide{min-width:1100px}
 .imgw.box{max-width:520px}
 .imgw.page{min-width:640px;max-width:860px}
